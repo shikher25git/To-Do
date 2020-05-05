@@ -8,7 +8,7 @@ let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem
 
 storage.setItem('items', JSON.stringify(itemsArray));
 storage.setItem('max',Object.keys(itemsArray).length);
-const data = JSON.parse(localStorage.getItem('items'));
+// const data = JSON.parse(localStorage.getItem('items'));
 
 inp.addEventListener("keyup",function(event){
 	if(event.keyCode===13){
@@ -53,10 +53,6 @@ function clearr(){
 	var cnf=confirm("Sure?");
 	if(cnf)
 		storage.clear();
-	itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : {};
-
-	storage.setItem('items', JSON.stringify(itemsArray));
-	storage.setItem('max',Object.keys(itemsArray).length);
 	display();
 	neww.style.display="none";
 }
@@ -66,8 +62,9 @@ function aadd(){
 	if(str.length!=0){
 		var count=parseInt(storage.getItem('max'));
 		storage.setItem('max',1+count); //to make sure keys don't overlap
-		itemsArray[count]=str;
-		storage.setItem('items',JSON.stringify(itemsArray));
+		var ia=JSON.parse(localStorage.getItem('items'));
+		ia[count]=str;
+		storage.setItem('items',JSON.stringify(ia));
 		display();
 		inp.value="";
 	}
